@@ -250,39 +250,60 @@
       color: var(--sub);
     }
 
-    /* ── インストール ── */
-    #install { background: var(--bg); }
-    .step {
-      display: flex;
+    /* ── 活用シーン ── */
+    #usecases { background: var(--bg); }
+    .usecase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 20px;
-      margin-bottom: 36px;
     }
-    .step-num {
-      width: 36px; height: 36px;
-      background: var(--red);
-      color: #fff;
-      border-radius: 50%;
+    .usecase-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .usecase-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.10); transform: translateY(-3px); }
+    .usecase-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
       display: flex; align-items: center; justify-content: center;
-      font-weight: 800;
-      font-size: 0.9rem;
+      font-size: 1.5rem;
       flex-shrink: 0;
-      margin-top: 2px;
     }
-    .step-body h3 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
-    pre {
-      background: #1e1e1e;
-      color: #d4d4d4;
-      border-radius: 8px;
-      padding: 16px 20px;
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      overflow-x: auto;
-      line-height: 1.7;
+    .usecase-card h3 { font-size: 1rem; font-weight: 800; color: var(--ink); }
+    .usecase-card p  { font-size: 0.85rem; color: var(--sub); line-height: 1.65; }
+
+    /* ── 技術スタック ── */
+    #techstack { background: var(--card); }
+    .tech-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
     }
-    pre .c  { color: #6a9955; }
-    pre .kw { color: #569cd6; }
-    pre .s  { color: #ce9178; }
-    pre .op { color: #9cdcfe; }
+    .tech-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 20px;
+      min-width: 180px;
+      transition: box-shadow .15s, transform .15s;
+    }
+    .tech-card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.08); transform: translateY(-2px); }
+    .tech-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .tech-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--ink); }
+    .tech-card p  { font-size: 0.78rem; color: var(--sub); margin-top: 2px; }
 
     /* ── フッター ── */
     footer {
@@ -461,47 +482,83 @@
   </div>
 </section>
 
-<!-- ────────────────────── INSTALL ────────────────────── -->
-<section id="install">
+<!-- ────────────────────── USE CASES ────────────────────── -->
+<section id="usecases">
   <div class="container">
-    <span class="section-label">Install</span>
-    <h2>インストール方法</h2>
+    <span class="section-label">Use Cases</span>
+    <h2>活用シーン</h2>
+    <div class="usecase-grid">
 
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-body">
-        <h3>リポジトリをクローン</h3>
-        <pre><span class="c"># リポジトリを取得</span>
-<span class="op">git</span> clone https://github.com/thukasab/rakuten-scraper.git
-<span class="op">cd</span> rakuten-scraper</pre>
+      <div class="usecase-card">
+        <div class="usecase-icon" style="background:#fff0f0;">🔍</div>
+        <h3>競合商品の価格調査</h3>
+        <p>同カテゴリの商品を一括収集し、価格帯・最安値・価格幅を素早く比較。手作業のコピー&ペーストが不要になります。</p>
       </div>
-    </div>
 
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-body">
-        <h3>依存ライブラリをインストール</h3>
-        <pre><span class="op">pip</span> install requests beautifulsoup4 openpyxl</pre>
+      <div class="usecase-card">
+        <div class="usecase-icon" style="background:#f0f6ff;">📊</div>
+        <h3>市場リサーチ</h3>
+        <p>カテゴリ内の評価・レビュー数を一覧化することで、売れ筋商品のトレンドや消費者ニーズを把握できます。</p>
       </div>
-    </div>
 
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-body">
-        <h3>GUI を起動</h3>
-        <pre><span class="kw">python</span> gui_app.py</pre>
+      <div class="usecase-card">
+        <div class="usecase-icon" style="background:#f0fff5;">📁</div>
+        <h3>データ分析の前処理</h3>
+        <p>商品名・価格・評価・レビュー数を Excel に整理済みの形で出力。そのまま BIツールや Python 分析に流せます。</p>
       </div>
-    </div>
 
-    <div class="step">
-      <div class="step-num">4</div>
-      <div class="step-body">
-        <h3>CLI として使う場合</h3>
-        <pre><span class="c"># キーワード「コーヒー」を 5 ページ取得</span>
-<span class="kw">python</span> scraper.py コーヒー --pages <span class="s">5</span> --output result.xlsx</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ────────────────────── TECH STACK ────────────────────── -->
+<section id="techstack">
+  <div class="container">
+    <span class="section-label">Tech Stack</span>
+    <h2>技術スタック</h2>
+    <div class="tech-grid">
+
+      <div class="tech-card">
+        <div class="tech-dot" style="background:#3572a5;"></div>
+        <div>
+          <h3>Python 3.x</h3>
+          <p>動作環境</p>
+        </div>
       </div>
-    </div>
 
+      <div class="tech-card">
+        <div class="tech-dot" style="background:#e0763b;"></div>
+        <div>
+          <h3>requests</h3>
+          <p>HTTP 通信・ページ取得</p>
+        </div>
+      </div>
+
+      <div class="tech-card">
+        <div class="tech-dot" style="background:#2e9e6b;"></div>
+        <div>
+          <h3>BeautifulSoup4</h3>
+          <p>HTML パース・要素抽出</p>
+        </div>
+      </div>
+
+      <div class="tech-card">
+        <div class="tech-dot" style="background:#1d7a3e;"></div>
+        <div>
+          <h3>openpyxl</h3>
+          <p>Excel ファイル出力</p>
+        </div>
+      </div>
+
+      <div class="tech-card">
+        <div class="tech-dot" style="background:#7b5ea7;"></div>
+        <div>
+          <h3>Tkinter</h3>
+          <p>GUI フレームワーク（標準ライブラリ）</p>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
